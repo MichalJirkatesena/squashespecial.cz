@@ -3,7 +3,8 @@
 Webová prezentace squashového klubu SquashEspecial s jednoduchou administrací obsahu.
 
 - **Frontend/hosting:** Next.js + Vercel
-- **Obsah, přihlašování, fotky:** Firebase (Firestore, Auth, Storage)
+- **Obsah, přihlašování:** Firebase (Firestore, Auth)
+- **Fotky:** Vercel Blob
 
 ## První spuštění
 
@@ -26,4 +27,5 @@ Postupuj podle **[SETUP.md](./SETUP.md)** — je tam návod krok za krokem, i pr
 - `lib/` — napojení na Firebase a načítání obsahu
 - `components/` — sdílené UI komponenty
 - `scripts/seed.ts` — jednorázové nahrání počátečních dat do Firestore (`npm run seed`)
-- `firestore.rules`, `storage.rules` — bezpečnostní pravidla (čtení pro všechny, zápis jen po přihlášení)
+- `firestore.rules` — bezpečnostní pravidla (čtení pro všechny, zápis jen po přihlášení)
+- `app/api/upload/` — server endpoint pro upload fotek do Vercel Blob (ověřuje přihlášení přes Firebase ID token)

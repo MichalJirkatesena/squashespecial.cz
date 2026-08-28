@@ -1,8 +1,7 @@
 "use client";
 
 import { useRef, useState, type ChangeEvent } from "react";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage } from "@/lib/firebaseClient";
+import { auth } from "@/lib/firebaseClient";
 
 interface PhotoUploaderProps {
   folder: string;
@@ -16,14 +15,23 @@ export function PhotoUploader({ folder, onUploaded }: PhotoUploaderProps) {
 
   async function handleFile(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
-    if (!file || !storage) return;
+    if (!file || !auth?.currentUser) return;
     setUploading(true);
     setError(null);
     try {
-      const path = `uploads/${folder}/${Date.now()}-${file.name}`;
-      const fileRef = ref(storage, path);
-      await uploadBytes(fileRef, file);
-      const url = await getDownloadURL(fileRef);
+      const token = await auth.currentUser.getIdToken();
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("folder", folder);
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error("upload failed");
+      const { url } = await res.json();
       onUploaded(url);
     } catch (err) {
       setError("Nahrání se nezdařilo. Zkus to prosím znovu.");
