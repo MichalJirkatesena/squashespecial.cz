@@ -74,8 +74,18 @@ export function DocEditor({ path, fields, defaultValue, revalidatePaths }: DocEd
           {field.type === "photo" && (
             <div className="flex items-center gap-3">
               {values[field.key] ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={values[field.key] as string} alt="" className="w-24 h-24 object-cover rounded" />
+                <div className="relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={values[field.key] as string} alt="" className="w-24 h-24 object-cover rounded" />
+                  <button
+                    type="button"
+                    onClick={() => update(field.key, "")}
+                    className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-5 h-5 text-xs leading-5"
+                    aria-label="Smazat fotku"
+                  >
+                    ×
+                  </button>
+                </div>
               ) : null}
               <PhotoUploader folder={field.folder} onUploaded={(url) => update(field.key, url)} />
             </div>
