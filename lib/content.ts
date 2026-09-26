@@ -7,6 +7,7 @@ import {
   seedGallery,
   seedHome,
   seedJunior,
+  seedNews,
   seedPlayers,
   seedPragueJuniorTour,
   seedTeams,
@@ -17,6 +18,7 @@ import type {
   Coach,
   ContactInfo,
   HomeContent,
+  NewsPost,
   Photo,
   Player,
   TeamGroup,
@@ -99,6 +101,15 @@ export async function getEvents(): Promise<CalendarEvent[]> {
     const snap = await getAdminDb()!.collection("events").orderBy("date", "asc").get();
     return snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<CalendarEvent, "id">) }));
   }, withSeedIds(seedEvents, "event"));
+}
+
+export async function getNews(limit?: number): Promise<NewsPost[]> {
+  return safeGet(async () => {
+    let query = getAdminDb()!.collection("news").orderBy("date", "desc");
+    if (limit) query = query.limit(limit);
+    const snap = await query.get();
+    return snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<NewsPost, "id">) }));
+  }, withSeedIds(seedNews, "news").slice(0, limit));
 }
 
 export async function getContact(): Promise<ContactInfo> {

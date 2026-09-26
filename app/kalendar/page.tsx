@@ -14,19 +14,19 @@ export default async function KalendarPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold mb-6">Kalendář akcí</h1>
+      <h1 className="font-display font-black uppercase text-4xl mb-8">Kalendář akcí</h1>
       {events.length === 0 ? (
-        <p className="text-slate-500">Momentálně nejsou naplánované žádné akce.</p>
+        <p className="text-muted">Momentálně nejsou naplánované žádné akce.</p>
       ) : (
-        <ul className="divide-y divide-slate-200">
+        <ul className="divide-y divide-line">
           {events.map((event) => (
-            <li key={event.id} className="py-4">
+            <li key={event.id} className="py-5">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <p className="font-semibold text-lg">{event.title}</p>
-                <p className="text-sm text-orange-600 font-medium">{formatDate(event.date)}</p>
+                <p className="font-display font-bold text-lg">{event.title}</p>
+                <p className="text-sm text-glow font-mono uppercase tracking-wide">{formatDate(event.date)}</p>
               </div>
-              {event.location && <p className="text-sm text-slate-500">{event.location}</p>}
-              {event.description && <p className="text-slate-700 mt-1 whitespace-pre-line">{event.description}</p>}
+              {event.location && <p className="text-sm text-muted">{event.location}</p>}
+              {event.description && <p className="text-muted mt-1 whitespace-pre-line">{event.description}</p>}
             </li>
           ))}
         </ul>

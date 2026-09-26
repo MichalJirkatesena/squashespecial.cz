@@ -2,6 +2,20 @@ export interface HomeContent {
   title: string;
   intro: string;
   heroImageUrl?: string;
+  stat1Value?: string;
+  stat1Label?: string;
+  stat2Value?: string;
+  stat2Label?: string;
+  stat3Value?: string;
+  stat3Label?: string;
+}
+
+export interface NewsPost {
+  id: string;
+  title: string;
+  body: string;
+  date: string;
+  order?: number;
 }
 
 export interface TextPageContent {

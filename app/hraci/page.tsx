@@ -9,7 +9,7 @@ export default async function HraciPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold mb-6">Naši hráči</h1>
+      <h1 className="font-display font-black uppercase text-4xl mb-8">Naši hráči</h1>
       <PersonGrid people={players} />
     </div>
   );

@@ -3,6 +3,7 @@ import type {
   Coach,
   ContactInfo,
   HomeContent,
+  NewsPost,
   Photo,
   Player,
   TeamGroup,
@@ -13,6 +14,12 @@ export const seedHome: HomeContent = {
   title: "SquashEspecial",
   intro:
     "Vítejte na stránkách squashového klubu SquashEspecial. Věnujeme se výchově mladých hráčů, přípravě týmů do ligových soutěží i squashi pro radost. Tento text uprav v administraci.",
+  stat1Value: "3",
+  stat1Label: "ligové týmy",
+  stat2Value: "12",
+  stat2Label: "aktivních juniorů",
+  stat3Value: "7/7",
+  stat3Label: "trénujeme každý den",
 };
 
 export const seedJunior: TextPageContent = {
@@ -48,6 +55,8 @@ export const seedTeams: Omit<TeamGroup, "id">[] = [
 ];
 
 export const seedEvents: Omit<CalendarEvent, "id">[] = [];
+
+export const seedNews: Omit<NewsPost, "id">[] = [];
 
 export const seedGallery: Omit<Photo, "id">[] = [];
 

@@ -17,6 +17,12 @@ export default function AdminUvodPage() {
           { key: "title", label: "Název", type: "text" },
           { key: "intro", label: "Úvodní text", type: "textarea" },
           { key: "heroImageUrl", label: "Hlavní fotka", type: "photo", folder: "home" },
+          { key: "stat1Value", label: "Statistika 1 – číslo", type: "text" },
+          { key: "stat1Label", label: "Statistika 1 – popisek", type: "text" },
+          { key: "stat2Value", label: "Statistika 2 – číslo", type: "text" },
+          { key: "stat2Label", label: "Statistika 2 – popisek", type: "text" },
+          { key: "stat3Value", label: "Statistika 3 – číslo", type: "text" },
+          { key: "stat3Label", label: "Statistika 3 – popisek", type: "text" },
         ]}
       />
     </div>
