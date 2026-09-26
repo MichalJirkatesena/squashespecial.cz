@@ -13,6 +13,7 @@ export default function AdminJuniorPage() {
       <DocEditor
         path="siteContent/junior"
         defaultValue={seedJunior}
+        revalidatePaths={["/junior"]}
         fields={[
           { key: "title", label: "Nadpis", type: "text" },
           { key: "body", label: "Text (squash camp, výsledky…)", type: "textarea" },
@@ -22,6 +23,7 @@ export default function AdminJuniorPage() {
       <CrudList
         collectionName="siteContent/junior/photos"
         emptyItem={{ url: "", caption: "" }}
+        revalidatePaths={["/junior"]}
         fields={[
           { key: "url", label: "Fotka", type: "photo", folder: "junior" },
           { key: "caption", label: "Popisek", type: "text" },

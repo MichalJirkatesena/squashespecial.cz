@@ -13,6 +13,7 @@ export default function AdminPragueTourPage() {
       <DocEditor
         path="siteContent/pragueJuniorTour"
         defaultValue={seedPragueJuniorTour}
+        revalidatePaths={["/prazska-juniorska-tour"]}
         fields={[
           { key: "title", label: "Nadpis", type: "text" },
           { key: "body", label: "Text", type: "textarea" },
@@ -22,6 +23,7 @@ export default function AdminPragueTourPage() {
       <CrudList
         collectionName="siteContent/pragueJuniorTour/photos"
         emptyItem={{ url: "", caption: "" }}
+        revalidatePaths={["/prazska-juniorska-tour"]}
         fields={[
           { key: "url", label: "Fotka", type: "photo", folder: "prazska-tour" },
           { key: "caption", label: "Popisek", type: "text" },

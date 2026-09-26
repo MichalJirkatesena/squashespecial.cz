@@ -4,15 +4,17 @@ import { useEffect, useState } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db, isFirebaseClientConfigured } from "@/lib/firebaseClient";
 import { PhotoUploader } from "@/components/PhotoUploader";
+import { triggerRevalidate } from "@/lib/revalidateClient";
 import type { FieldConfig } from "./CrudList";
 
 interface DocEditorProps {
   path: string;
   fields: FieldConfig[];
   defaultValue: object;
+  revalidatePaths: string[];
 }
 
-export function DocEditor({ path, fields, defaultValue }: DocEditorProps) {
+export function DocEditor({ path, fields, defaultValue, revalidatePaths }: DocEditorProps) {
   const [values, setValues] = useState<Record<string, unknown>>(defaultValue as Record<string, unknown>);
   const [loading, setLoading] = useState(true);
   const [saved, setSaved] = useState(false);
@@ -40,6 +42,7 @@ export function DocEditor({ path, fields, defaultValue }: DocEditorProps) {
     await setDoc(doc(db, path), values, { merge: true });
     setSaved(true);
     setTimeout(() => setSaved(false), 1500);
+    triggerRevalidate(revalidatePaths);
   }
 
   if (!isFirebaseClientConfigured) {

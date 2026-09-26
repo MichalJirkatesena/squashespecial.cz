@@ -12,6 +12,7 @@ export default function AdminKontaktPage() {
       <DocEditor
         path="siteSettings/contact"
         defaultValue={seedContact}
+        revalidatePaths={["/"]}
         fields={[
           { key: "address", label: "Adresa", type: "text" },
           { key: "phone", label: "Telefon", type: "text" },

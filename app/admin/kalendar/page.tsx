@@ -11,6 +11,7 @@ export default function AdminKalendarPage() {
       <CrudList
         collectionName="events"
         emptyItem={{ title: "Nová akce", date: "", location: "", description: "" }}
+        revalidatePaths={["/kalendar"]}
         fields={[
           { key: "title", label: "Název akce", type: "text" },
           { key: "date", label: "Datum", type: "date" },

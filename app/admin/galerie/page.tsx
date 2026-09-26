@@ -11,6 +11,7 @@ export default function AdminGaleriePage() {
       <CrudList
         collectionName="galleryPhotos"
         emptyItem={{ url: "", caption: "" }}
+        revalidatePaths={["/galerie"]}
         fields={[
           { key: "url", label: "Fotka", type: "photo", folder: "galerie" },
           { key: "caption", label: "Popisek", type: "text" },

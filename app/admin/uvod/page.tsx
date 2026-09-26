@@ -12,6 +12,7 @@ export default function AdminUvodPage() {
       <DocEditor
         path="siteContent/home"
         defaultValue={seedHome}
+        revalidatePaths={["/"]}
         fields={[
           { key: "title", label: "Název", type: "text" },
           { key: "intro", label: "Úvodní text", type: "textarea" },

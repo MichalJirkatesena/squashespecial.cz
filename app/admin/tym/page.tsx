@@ -11,6 +11,7 @@ export default function AdminTymPage() {
       <CrudList
         collectionName="teams"
         emptyItem={{ league: "Nová liga", description: "", photos: [] }}
+        revalidatePaths={["/tym"]}
         fields={[
           { key: "league", label: "Liga (např. 1. liga)", type: "text" },
           { key: "description", label: "Informativní text", type: "textarea" },

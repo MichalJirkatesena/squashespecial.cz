@@ -11,6 +11,7 @@ export default function AdminTrenerePage() {
       <CrudList
         collectionName="coaches"
         emptyItem={{ name: "Nový trenér", photoUrl: "", bio: "" }}
+        revalidatePaths={["/trenere"]}
         fields={[
           { key: "name", label: "Jméno", type: "text" },
           { key: "photoUrl", label: "Fotka", type: "photo", folder: "trenere" },

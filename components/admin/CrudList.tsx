@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import { db, isFirebaseClientConfigured } from "@/lib/firebaseClient";
 import { PhotoUploader } from "@/components/PhotoUploader";
+import { triggerRevalidate } from "@/lib/revalidateClient";
 
 export type FieldConfig =
   | { key: string; label: string; type: "text" }
@@ -27,9 +28,10 @@ interface CrudListProps {
   collectionName: string;
   fields: FieldConfig[];
   emptyItem: Record<string, unknown>;
+  revalidatePaths: string[];
 }
 
-export function CrudList({ collectionName, fields, emptyItem }: CrudListProps) {
+export function CrudList({ collectionName, fields, emptyItem, revalidatePaths }: CrudListProps) {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const [savedId, setSavedId] = useState<string | null>(null);
@@ -57,6 +59,7 @@ export function CrudList({ collectionName, fields, emptyItem }: CrudListProps) {
     const data = { ...emptyItem, order: nextOrder };
     const ref = await addDoc(collection(db, collectionName), data);
     setItems((prev) => [...prev, { id: ref.id, ...data } as Item]);
+    triggerRevalidate(revalidatePaths);
   }
 
   async function handleSave(item: Item) {
@@ -65,6 +68,7 @@ export function CrudList({ collectionName, fields, emptyItem }: CrudListProps) {
     await updateDoc(doc(db, collectionName, id), data);
     setSavedId(id);
     setTimeout(() => setSavedId((cur) => (cur === id ? null : cur)), 1500);
+    triggerRevalidate(revalidatePaths);
   }
 
   async function handleDelete(id: string) {
@@ -72,6 +76,7 @@ export function CrudList({ collectionName, fields, emptyItem }: CrudListProps) {
     if (!confirm("Opravdu smazat?")) return;
     await deleteDoc(doc(db, collectionName, id));
     setItems((prev) => prev.filter((item) => item.id !== id));
+    triggerRevalidate(revalidatePaths);
   }
 
   if (!isFirebaseClientConfigured) {

@@ -11,6 +11,7 @@ export default function AdminHraciPage() {
       <CrudList
         collectionName="players"
         emptyItem={{ name: "Nový hráč", photoUrl: "", bio: "" }}
+        revalidatePaths={["/hraci"]}
         fields={[
           { key: "name", label: "Jméno", type: "text" },
           { key: "photoUrl", label: "Fotka", type: "photo", folder: "hraci" },
