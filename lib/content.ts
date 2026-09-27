@@ -103,6 +103,19 @@ export async function getEvents(): Promise<CalendarEvent[]> {
   }, withSeedIds(seedEvents, "event"));
 }
 
+export async function getUpcomingEvents(limit: number): Promise<CalendarEvent[]> {
+  const todayIso = new Date().toISOString().slice(0, 10);
+  return safeGet(async () => {
+    const snap = await getAdminDb()!
+      .collection("events")
+      .where("date", ">=", todayIso)
+      .orderBy("date", "asc")
+      .limit(limit)
+      .get();
+    return snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<CalendarEvent, "id">) }));
+  }, withSeedIds(seedEvents, "event").filter((e) => e.date >= todayIso).slice(0, limit));
+}
+
 export async function getNews(limit?: number): Promise<NewsPost[]> {
   return safeGet(async () => {
     let query = getAdminDb()!.collection("news").orderBy("date", "desc");

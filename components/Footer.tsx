@@ -4,7 +4,7 @@ export function Footer({ contact }: { contact: ContactInfo }) {
   const hasContact = contact.address || contact.phone || contact.email || contact.openingHours;
 
   return (
-    <footer className="mt-auto border-t border-line">
+    <footer className="mt-auto border-t border-glow/20">
       <div className="max-w-6xl mx-auto px-4 py-10 grid gap-8 sm:grid-cols-2">
         <div>
           <p className="font-display font-extrabold uppercase tracking-wide text-fg mb-2">

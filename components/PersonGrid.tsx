@@ -15,8 +15,8 @@ export function PersonGrid({ people }: { people: Person[] }) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
       {people.map((person) => (
-        <div key={person.id} className="text-center">
-          <div className="relative aspect-square w-full overflow-hidden rounded-sm bg-surface border border-line mb-3">
+        <div key={person.id} className="text-center group">
+          <div className="relative aspect-square w-full overflow-hidden rounded-sm bg-surface border border-line group-hover:border-glow/60 transition-colors mb-3">
             {person.photoUrl ? (
               <Image src={person.photoUrl} alt={person.name} fill className="object-cover" />
             ) : (

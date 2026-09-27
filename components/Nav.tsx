@@ -28,7 +28,7 @@ export function Nav() {
 
         <nav className="hidden md:flex items-center gap-6 font-display font-bold uppercase text-sm tracking-wide">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className="text-muted hover:text-fg transition-colors">
+            <Link key={link.href} href={link.href} className="text-muted hover:text-glow transition-colors">
               {link.label}
             </Link>
           ))}
@@ -66,7 +66,7 @@ export function Nav() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="text-muted hover:text-fg py-2"
+              className="text-muted hover:text-glow py-2"
             >
               {link.label}
             </Link>

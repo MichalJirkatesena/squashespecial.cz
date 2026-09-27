@@ -9,7 +9,7 @@ export function PhotoGrid({ photos }: { photos: Photo[] }) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       {photos.map((photo) => (
-        <figure key={photo.id} className="relative aspect-square overflow-hidden rounded-sm bg-surface border border-line">
+        <figure key={photo.id} className="relative aspect-square overflow-hidden rounded-sm bg-surface border border-line hover:border-glow/60 transition-colors">
           <Image
             src={photo.url}
             alt={photo.caption ?? ""}
