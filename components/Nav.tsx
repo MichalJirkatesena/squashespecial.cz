@@ -2,12 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { LEAGUES } from "@/lib/leagues";
 
-const leagues = [
-  { href: "/tym#1-liga", label: "1. liga" },
-  { href: "/tym#2-liga", label: "2. liga" },
-  { href: "/tym#3-liga", label: "3. liga" },
-];
+const leagues = LEAGUES.map((l) => ({ href: `/tym/${l.slug}`, label: l.label }));
 
 const links = [
   { href: "/junior", label: "Junioři" },
@@ -37,15 +34,12 @@ export function Nav() {
           </Link>
 
           <div className="relative group">
-            <button
-              type="button"
-              className="flex items-center gap-1.5 text-muted hover:text-glow transition-colors"
-            >
+            <Link href="/tym" className="flex items-center gap-1.5 text-muted hover:text-glow transition-colors">
               Ligové týmy
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                 <path d="M6 9l6 6 6-6" />
               </svg>
-            </button>
+            </Link>
             <div className="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all">
               <div className="bg-bg border border-line rounded-sm shadow-lg overflow-hidden min-w-[140px]">
                 {leagues.map((league) => (
@@ -100,7 +94,9 @@ export function Nav() {
             Junioři
           </Link>
 
-          <span className="text-fg py-2 mt-1">Ligové týmy</span>
+          <Link href="/tym" onClick={() => setOpen(false)} className="text-fg py-2 mt-1">
+            Ligové týmy
+          </Link>
           {leagues.map((league) => (
             <Link
               key={league.href}

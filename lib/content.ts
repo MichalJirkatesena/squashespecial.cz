@@ -1,5 +1,6 @@
 import "server-only";
 import { getAdminDb } from "./firebaseAdmin";
+import type { LeagueSlug } from "./leagues";
 import {
   seedCoaches,
   seedContact,
@@ -10,7 +11,9 @@ import {
   seedNews,
   seedPlayers,
   seedPragueJuniorTour,
-  seedTeams,
+  seedTeam1,
+  seedTeam2,
+  seedTeam3,
   withSeedIds,
 } from "./seed-data";
 import type {
@@ -21,7 +24,6 @@ import type {
   NewsPost,
   Photo,
   Player,
-  TeamGroup,
   TextPageContent,
 } from "./types";
 
@@ -43,11 +45,14 @@ export async function getHome(): Promise<HomeContent> {
   }, seedHome);
 }
 
-type TextPageSlug = "junior" | "pragueJuniorTour";
+type TextPageSlug = "junior" | "pragueJuniorTour" | LeagueSlug;
 
 const textPageFallbacks: Record<TextPageSlug, TextPageContent> = {
   junior: seedJunior,
   pragueJuniorTour: seedPragueJuniorTour,
+  "1-liga": seedTeam1,
+  "2-liga": seedTeam2,
+  "3-liga": seedTeam3,
 };
 
 export async function getTextPage(slug: TextPageSlug): Promise<TextPageContent> {
@@ -82,11 +87,14 @@ export async function getCoaches(): Promise<Coach[]> {
   }, withSeedIds(seedCoaches, "coach"));
 }
 
-export async function getTeams(): Promise<TeamGroup[]> {
+export async function getTeamPlayers(slug: LeagueSlug): Promise<Player[]> {
   return safeGet(async () => {
-    const snap = await getAdminDb()!.collection("teams").orderBy("order", "asc").get();
-    return snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<TeamGroup, "id">) }));
-  }, withSeedIds(seedTeams, "team"));
+    const snap = await getAdminDb()!
+      .collection(`siteContent/${slug}/players`)
+      .orderBy("order", "asc")
+      .get();
+    return snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<Player, "id">) }));
+  }, []);
 }
 
 export async function getGalleryPhotos(): Promise<Photo[]> {

@@ -10,7 +10,9 @@ import {
   seedJunior,
   seedPlayers,
   seedPragueJuniorTour,
-  seedTeams,
+  seedTeam1,
+  seedTeam2,
+  seedTeam3,
 } from "../lib/seed-data";
 
 const projectId = process.env.FIREBASE_PROJECT_ID;
@@ -33,15 +35,18 @@ async function seed() {
   await db.doc("siteContent/home").set(seedHome, { merge: true });
   await db.doc("siteContent/junior").set(seedJunior, { merge: true });
   await db.doc("siteContent/pragueJuniorTour").set(seedPragueJuniorTour, { merge: true });
+  await db.doc("siteContent/1-liga").set(seedTeam1, { merge: true });
+  await db.doc("siteContent/2-liga").set(seedTeam2, { merge: true });
+  await db.doc("siteContent/3-liga").set(seedTeam3, { merge: true });
   await db.doc("siteSettings/contact").set(seedContact, { merge: true });
 
-  for (const collectionName of ["players", "coaches", "teams"] as const) {
+  for (const collectionName of ["players", "coaches"] as const) {
     const existing = await db.collection(collectionName).limit(1).get();
     if (!existing.empty) {
       console.log(`Kolekce "${collectionName}" už obsahuje data, přeskakuji.`);
       continue;
     }
-    const items = collectionName === "players" ? seedPlayers : collectionName === "coaches" ? seedCoaches : seedTeams;
+    const items = collectionName === "players" ? seedPlayers : seedCoaches;
     for (const item of items) {
       await db.collection(collectionName).add(item);
     }

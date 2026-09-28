@@ -1,41 +1,34 @@
-import Image from "next/image";
-import { getTeams } from "@/lib/content";
+import Link from "next/link";
+import { getTextPage } from "@/lib/content";
+import { LEAGUES } from "@/lib/leagues";
 
 export const revalidate = 60;
-export const metadata = { title: "Tým SquashEspecial | SquashEspecial" };
-
-function slugifyLeague(league: string) {
-  return league
-    .toLowerCase()
-    .replace(/\./g, "")
-    .trim()
-    .replace(/\s+/g, "-");
-}
+export const metadata = { title: "Team SquashEspecial | SquashEspecial" };
 
 export default async function TymPage() {
-  const teams = await getTeams();
+  const teams = await Promise.all(LEAGUES.map((l) => getTextPage(l.slug)));
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <h1 className="font-display font-black uppercase text-4xl mb-8">Team SquashEspecial</h1>
-      <div className="space-y-14">
-        {teams.map((team) => (
-          <section key={team.id} id={slugifyLeague(team.league)} className="scroll-mt-28">
-            <h2 className="font-display font-bold uppercase text-2xl mb-2">{team.league}</h2>
-            {team.description && <p className="text-muted whitespace-pre-line mb-4 leading-relaxed">{team.description}</p>}
-            {team.photos.length > 0 ? (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {team.photos.map((url, i) => (
-                  <div key={i} className="relative aspect-square overflow-hidden rounded-sm bg-surface border border-line">
-                    <Image src={url} alt={`${team.league} foto ${i + 1}`} fill className="object-cover" />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-muted">Zatím zde nejsou žádné fotky.</p>
-            )}
-          </section>
-        ))}
+      <div className="grid gap-6 sm:grid-cols-3">
+        {LEAGUES.map((league, i) => {
+          const content = teams[i];
+          return (
+            <Link
+              key={league.slug}
+              href={`/tym/${league.slug}`}
+              className="block border border-line rounded-sm p-6 hover:border-glow/60 transition-colors"
+            >
+              <h2 className="font-display font-bold uppercase text-2xl mb-2">{content.title}</h2>
+              {content.body ? (
+                <p className="text-muted text-sm leading-relaxed line-clamp-3">{content.body}</p>
+              ) : (
+                <p className="text-muted text-sm">Zobrazit hráče a informace →</p>
+              )}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

@@ -6,7 +6,6 @@ import type {
   NewsPost,
   Photo,
   Player,
-  TeamGroup,
   TextPageContent,
 } from "./types";
 
@@ -48,11 +47,9 @@ export const seedCoaches: Omit<Coach, "id">[] = [
   { name: "Miky", order: 3 },
 ];
 
-export const seedTeams: Omit<TeamGroup, "id">[] = [
-  { league: "1. liga", description: "", photos: [], order: 1 },
-  { league: "2. liga", description: "", photos: [], order: 2 },
-  { league: "3. liga", description: "", photos: [], order: 3 },
-];
+export const seedTeam1: TextPageContent = { title: "1. liga", body: "" };
+export const seedTeam2: TextPageContent = { title: "2. liga", body: "" };
+export const seedTeam3: TextPageContent = { title: "3. liga", body: "" };
 
 export const seedEvents: Omit<CalendarEvent, "id">[] = [];
 

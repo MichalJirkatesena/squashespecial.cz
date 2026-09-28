@@ -46,14 +46,6 @@ export interface Coach {
   order?: number;
 }
 
-export interface TeamGroup {
-  id: string;
-  league: string;
-  description?: string;
-  photos: string[];
-  order?: number;
-}
-
 export interface CalendarEvent {
   id: string;
   title: string;
