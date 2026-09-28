@@ -4,6 +4,14 @@ import { getTeams } from "@/lib/content";
 export const revalidate = 60;
 export const metadata = { title: "Tým SquashEspecial | SquashEspecial" };
 
+function slugifyLeague(league: string) {
+  return league
+    .toLowerCase()
+    .replace(/\./g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
 export default async function TymPage() {
   const teams = await getTeams();
 
@@ -12,7 +20,7 @@ export default async function TymPage() {
       <h1 className="font-display font-black uppercase text-4xl mb-8">Team SquashEspecial</h1>
       <div className="space-y-14">
         {teams.map((team) => (
-          <section key={team.id}>
+          <section key={team.id} id={slugifyLeague(team.league)} className="scroll-mt-28">
             <h2 className="font-display font-bold uppercase text-2xl mb-2">{team.league}</h2>
             {team.description && <p className="text-muted whitespace-pre-line mb-4 leading-relaxed">{team.description}</p>}
             {team.photos.length > 0 ? (

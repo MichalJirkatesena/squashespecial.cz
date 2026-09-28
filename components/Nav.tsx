@@ -3,13 +3,18 @@
 import Link from "next/link";
 import { useState } from "react";
 
+const leagues = [
+  { href: "/tym#1-liga", label: "1. liga" },
+  { href: "/tym#2-liga", label: "2. liga" },
+  { href: "/tym#3-liga", label: "3. liga" },
+];
+
 const links = [
-  { href: "/junior", label: "Junior" },
-  { href: "/hraci", label: "Hráči" },
+  { href: "/junior", label: "Junioři" },
   { href: "/trenere", label: "Trenéři" },
-  { href: "/tym", label: "Tým" },
-  { href: "/galerie", label: "Galerie" },
-  { href: "/prazska-juniorska-tour", label: "Pražská tour" },
+  { href: "/kalendar", label: "Kalendář akcí" },
+  { href: "/galerie", label: "Fotogalerie" },
+  { href: "/prazska-juniorska-tour", label: "Pražská Junior Tour" },
 ];
 
 export function Nav() {
@@ -27,16 +32,46 @@ export function Nav() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 font-display font-bold uppercase text-base tracking-wide">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href} className="text-muted hover:text-glow transition-colors">
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/kalendar"
-            className="bg-glow text-[#05130d] px-5 py-3 rounded-sm font-mono text-sm tracking-wide"
-          >
-            Kalendář
+          <Link href="/junior" className="text-muted hover:text-glow transition-colors">
+            Junioři
+          </Link>
+
+          <div className="relative group">
+            <button
+              type="button"
+              className="flex items-center gap-1.5 text-muted hover:text-glow transition-colors"
+            >
+              Ligové týmy
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+            <div className="absolute left-0 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all">
+              <div className="bg-bg border border-line rounded-sm shadow-lg overflow-hidden min-w-[140px]">
+                {leagues.map((league) => (
+                  <Link
+                    key={league.href}
+                    href={league.href}
+                    className="block px-4 py-3 text-sm text-muted hover:text-glow hover:bg-surface transition-colors"
+                  >
+                    {league.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <Link href="/trenere" className="text-muted hover:text-glow transition-colors">
+            Trenéři
+          </Link>
+          <Link href="/kalendar" className="text-muted hover:text-glow transition-colors">
+            Kalendář akcí
+          </Link>
+          <Link href="/galerie" className="text-muted hover:text-glow transition-colors">
+            Fotogalerie
+          </Link>
+          <Link href="/prazska-juniorska-tour" className="text-muted hover:text-glow transition-colors">
+            Pražská Junior Tour
           </Link>
         </nav>
 
@@ -61,23 +96,34 @@ export function Nav() {
 
       {open && (
         <nav className="md:hidden border-t border-line px-4 py-4 flex flex-col gap-1 font-display font-bold uppercase text-sm tracking-wide">
-          {links.map((link) => (
+          <Link href="/junior" onClick={() => setOpen(false)} className="text-muted hover:text-glow py-2">
+            Junioři
+          </Link>
+
+          <span className="text-fg py-2 mt-1">Ligové týmy</span>
+          {leagues.map((league) => (
             <Link
-              key={link.href}
-              href={link.href}
+              key={league.href}
+              href={league.href}
               onClick={() => setOpen(false)}
-              className="text-muted hover:text-glow py-2"
+              className="text-muted hover:text-glow py-2 pl-4 text-xs"
             >
-              {link.label}
+              {league.label}
             </Link>
           ))}
-          <Link
-            href="/kalendar"
-            onClick={() => setOpen(false)}
-            className="mt-2 inline-block bg-glow text-[#05130d] px-4 py-2 rounded-sm font-mono text-xs tracking-wide w-fit"
-          >
-            Kalendář
-          </Link>
+
+          {links
+            .filter((l) => l.href !== "/junior")
+            .map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="text-muted hover:text-glow py-2 mt-1 first:mt-0"
+              >
+                {link.label}
+              </Link>
+            ))}
         </nav>
       )}
     </header>
