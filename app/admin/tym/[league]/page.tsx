@@ -42,11 +42,15 @@ export default async function AdminLeaguePage({ params }: { params: Promise<{ le
       <h2 className="text-xl font-semibold mt-10 mb-4">Hráči</h2>
       <CrudList
         collectionName={`siteContent/${league}/players`}
-        emptyItem={{ name: "Nový hráč", photoUrl: "", bio: "" }}
+        emptyItem={{ name: "Nový hráč", photoUrl: "", nickname: "", birthYear: "", squashSince: "", achievements: "", bio: "" }}
         revalidatePaths={[`/tym/${league}`]}
         fields={[
           { key: "name", label: "Jméno", type: "text" },
           { key: "photoUrl", label: "Fotka", type: "photo", folder: `tym-${league}` },
+          { key: "nickname", label: "Přezdívka", type: "text" },
+          { key: "birthYear", label: "Ročník", type: "text" },
+          { key: "squashSince", label: "Squash hraje od", type: "text" },
+          { key: "achievements", label: "Úspěchy", type: "textarea" },
           { key: "bio", label: "Krátký profil", type: "textarea" },
         ]}
       />

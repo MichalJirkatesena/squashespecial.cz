@@ -34,6 +34,10 @@ export interface Player {
   id: string;
   name: string;
   photoUrl?: string;
+  nickname?: string;
+  birthYear?: string;
+  squashSince?: string;
+  achievements?: string;
   bio?: string;
   order?: number;
 }
@@ -42,6 +46,10 @@ export interface Coach {
   id: string;
   name: string;
   photoUrl?: string;
+  nickname?: string;
+  birthYear?: string;
+  squashSince?: string;
+  achievements?: string;
   bio?: string;
   order?: number;
 }
