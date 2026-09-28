@@ -17,16 +17,16 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-40 bg-bg/95 backdrop-blur border-b border-line">
-      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
+      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-24">
         <Link
           href="/"
-          className="font-display font-extrabold uppercase tracking-wide text-lg"
+          className="font-display font-extrabold uppercase tracking-wide text-2xl sm:text-3xl"
           onClick={() => setOpen(false)}
         >
           Squash<span className="text-matchred">Especial</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6 font-display font-bold uppercase text-sm tracking-wide">
+        <nav className="hidden md:flex items-center gap-8 font-display font-bold uppercase text-base tracking-wide">
           {links.map((link) => (
             <Link key={link.href} href={link.href} className="text-muted hover:text-glow transition-colors">
               {link.label}
@@ -34,7 +34,7 @@ export function Nav() {
           ))}
           <Link
             href="/kalendar"
-            className="bg-glow text-[#05130d] px-4 py-2 rounded-sm font-mono text-xs tracking-wide"
+            className="bg-glow text-[#05130d] px-5 py-3 rounded-sm font-mono text-sm tracking-wide"
           >
             Kalendář
           </Link>

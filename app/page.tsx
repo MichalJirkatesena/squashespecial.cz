@@ -47,78 +47,93 @@ export default async function HomePage() {
 
   return (
     <div>
-      <section className="relative overflow-hidden">
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 65% 55% at 82% 15%, rgba(63,235,172,0.20), transparent 60%), radial-gradient(ellipse 50% 40% at 10% 90%, rgba(63,235,172,0.10), transparent 60%)",
-          }}
-        />
-        <div className="relative max-w-6xl mx-auto px-4 py-16 sm:py-24 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div>
-            <span className="font-mono text-xs tracking-widest uppercase text-glow block mb-4">
+      <section className="relative w-full h-[52vh] min-h-[360px] sm:h-[64vh] overflow-hidden">
+        {home.heroImageUrl ? (
+          <Image src={home.heroImageUrl} alt={home.title} fill priority className="object-cover" />
+        ) : (
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(160deg, #0f9d76 0%, #142520 100%)" }}
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+        <div className="absolute inset-0 flex items-end">
+          <div className="max-w-6xl mx-auto px-4 pb-10 sm:pb-14 w-full">
+            <span className="font-mono text-xs tracking-widest uppercase text-white/90 block mb-3">
               Squashový klub · Praha
             </span>
-            <h1 className="font-display font-black uppercase text-4xl sm:text-6xl leading-[0.95] mb-5 text-balance">
+            <h1 className="font-display font-black uppercase text-white text-4xl sm:text-6xl leading-[0.95] mb-4 text-balance">
               {home.title}
             </h1>
-            <p className="text-muted text-lg leading-relaxed max-w-xl whitespace-pre-line mb-8">
+            <p className="text-white/85 text-lg leading-relaxed max-w-2xl whitespace-pre-line">
               {home.intro}
             </p>
-            {stats.length > 0 && (
-              <div className="flex flex-wrap gap-3">
-                {stats.map((stat, i) => (
-                  <div key={i} className="font-mono border border-glow/30 rounded-sm px-4 py-3 min-w-[130px]">
-                    <b className="block text-2xl text-glow tabular-nums">{stat.value}</b>
-                    <span className="text-xs text-muted uppercase tracking-wide">{stat.label}</span>
-                  </div>
+          </div>
+        </div>
+      </section>
+
+      {stats.length > 0 && (
+        <section className="max-w-6xl mx-auto px-4 py-12">
+          <div className="grid gap-4 sm:grid-cols-3">
+            {stats.map((stat, i) => (
+              <div key={i} className="font-mono text-center border border-line rounded-sm px-6 py-8 bg-surface">
+                <b className="block text-4xl text-glow tabular-nums mb-1">{stat.value}</b>
+                <span className="text-sm text-muted uppercase tracking-wide">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="max-w-6xl mx-auto px-4 py-14 border-t border-line">
+        <div className="grid gap-12 md:grid-cols-2">
+          <div>
+            <SectionHeading>Aktuality</SectionHeading>
+            {news.length === 0 ? (
+              <p className="text-muted">Zatím tu nejsou žádné aktuality.</p>
+            ) : (
+              <div className="space-y-5">
+                {news.map((post) => (
+                  <article key={post.id} className="border border-line rounded-sm p-5 hover:border-glow/50 transition-colors">
+                    <span className="font-mono text-xs text-glow uppercase tracking-wide block mb-2">
+                      {formatDate(post.date)}
+                    </span>
+                    <h3 className="font-display font-bold text-lg mb-2 text-balance">{post.title}</h3>
+                    <p className="text-muted text-sm leading-relaxed whitespace-pre-line">{post.body}</p>
+                  </article>
                 ))}
               </div>
             )}
           </div>
 
-          {home.heroImageUrl ? (
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm border border-glow/20">
-              <Image src={home.heroImageUrl} alt={home.title} fill className="object-cover" />
-            </div>
-          ) : (
-            <div
-              className="relative aspect-[4/5] w-full rounded-sm border border-glow/20"
-              style={{
-                background: "linear-gradient(200deg, #172b25 0%, #0b0f10 70%)",
-              }}
-            />
-          )}
-        </div>
-      </section>
-
-      <section className="max-w-6xl mx-auto px-4 py-14 border-t border-line">
-        <SectionHeading>Nejbližší akce</SectionHeading>
-        {upcomingEvents.length === 0 ? (
-          <p className="text-muted">Momentálně nejsou naplánované žádné akce.</p>
-        ) : (
-          <div className="grid gap-4 sm:grid-cols-3">
-            {upcomingEvents.map((event) => {
-              const badge = formatBadge(event.date);
-              return (
-                <div
-                  key={event.id}
-                  className="flex gap-4 border border-line rounded-sm p-4 hover:border-glow/50 transition-colors"
-                >
-                  <div className="font-mono text-center shrink-0 border-r border-line pr-4">
-                    <b className="block text-2xl text-glow tabular-nums leading-none">{badge.day}</b>
-                    <span className="text-xs text-muted uppercase">{badge.month}</span>
-                  </div>
-                  <div className="min-w-0">
-                    <p className="font-display font-bold text-base mb-1 truncate">{event.title}</p>
-                    {event.location && <p className="text-muted text-xs">{event.location}</p>}
-                  </div>
-                </div>
-              );
-            })}
+          <div>
+            <SectionHeading>Nejbližší akce</SectionHeading>
+            {upcomingEvents.length === 0 ? (
+              <p className="text-muted">Momentálně nejsou naplánované žádné akce.</p>
+            ) : (
+              <div className="space-y-4">
+                {upcomingEvents.map((event) => {
+                  const badge = formatBadge(event.date);
+                  return (
+                    <div
+                      key={event.id}
+                      className="flex gap-4 border border-line rounded-sm p-4 hover:border-glow/50 transition-colors"
+                    >
+                      <div className="font-mono text-center shrink-0 border-r border-line pr-4">
+                        <b className="block text-2xl text-glow tabular-nums leading-none">{badge.day}</b>
+                        <span className="text-xs text-muted uppercase">{badge.month}</span>
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-display font-bold text-base mb-1 truncate">{event.title}</p>
+                        {event.location && <p className="text-muted text-xs">{event.location}</p>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </section>
 
       <section className="max-w-6xl mx-auto px-4 py-14 border-t border-line">
@@ -145,25 +160,6 @@ export default async function HomePage() {
                 </div>
                 <p className="font-display font-bold uppercase tracking-wide text-sm">{player.name}</p>
               </div>
-            ))}
-          </div>
-        )}
-      </section>
-
-      <section className="max-w-6xl mx-auto px-4 py-14 border-t border-line">
-        <SectionHeading>Aktuality</SectionHeading>
-        {news.length === 0 ? (
-          <p className="text-muted">Zatím tu nejsou žádné aktuality.</p>
-        ) : (
-          <div className="grid gap-6 sm:grid-cols-3">
-            {news.map((post) => (
-              <article key={post.id} className="border border-line rounded-sm p-5 hover:border-glow/50 transition-colors">
-                <span className="font-mono text-xs text-glow uppercase tracking-wide block mb-2">
-                  {formatDate(post.date)}
-                </span>
-                <h3 className="font-display font-bold text-lg mb-2 text-balance">{post.title}</h3>
-                <p className="text-muted text-sm leading-relaxed whitespace-pre-line">{post.body}</p>
-              </article>
             ))}
           </div>
         )}
