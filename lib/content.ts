@@ -87,7 +87,7 @@ export async function getCoaches(): Promise<Coach[]> {
   }, withSeedIds(seedCoaches, "coach"));
 }
 
-export async function getTeamPlayers(slug: LeagueSlug): Promise<Player[]> {
+export async function getRosterPlayers(slug: TextPageSlug): Promise<Player[]> {
   return safeGet(async () => {
     const snap = await getAdminDb()!
       .collection(`siteContent/${slug}/players`)

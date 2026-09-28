@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { ReactNode } from "react";
 import { getHome, getNews, getPlayers, getUpcomingEvents } from "@/lib/content";
 
@@ -137,12 +136,7 @@ export default async function HomePage() {
       </section>
 
       <section className="max-w-6xl mx-auto px-4 py-14 border-t border-line">
-        <div className="flex items-center justify-between mb-6">
-          <SectionHeading>Naši hráči</SectionHeading>
-          <Link href="/hraci" className="font-mono text-xs uppercase tracking-wide text-glow hover:underline">
-            Všichni hráči →
-          </Link>
-        </div>
+        <SectionHeading>Naši hráči</SectionHeading>
         {featuredPlayers.length === 0 ? (
           <p className="text-muted">Zatím zde nejsou žádní hráči k zobrazení.</p>
         ) : (

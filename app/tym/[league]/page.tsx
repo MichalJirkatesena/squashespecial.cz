@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getTeamPlayers, getTextPage, getTextPagePhotos } from "@/lib/content";
+import { getRosterPlayers, getTextPage, getTextPagePhotos } from "@/lib/content";
 import { isLeagueSlug, LEAGUES } from "@/lib/leagues";
 import { PersonGrid } from "@/components/PersonGrid";
 import { PhotoGrid } from "@/components/PhotoGrid";
@@ -17,7 +17,7 @@ export default async function LeaguePage({ params }: { params: Promise<{ league:
 
   const [content, players, photos] = await Promise.all([
     getTextPage(league),
-    getTeamPlayers(league),
+    getRosterPlayers(league),
     getTextPagePhotos(league),
   ]);
 

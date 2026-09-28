@@ -11,7 +11,7 @@ const sections = [
   { href: "/admin/galerie", label: "Galerie fotek" },
   { href: "/admin/junior", label: "Juniorské akce a turnaje" },
   { href: "/admin/prazska-tour", label: "Pražská juniorská tour" },
-  { href: "/admin/hraci", label: "Naši hráči" },
+  { href: "/admin/hraci", label: "Hráči na homepage" },
   { href: "/admin/trenere", label: "Trenéři" },
   { href: "/admin/tym", label: "Team SquashEspecial (ligy)" },
   { href: "/admin/kalendar", label: "Kalendář akcí" },
