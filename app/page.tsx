@@ -158,6 +158,12 @@ export default async function HomePage() {
           </div>
         )}
       </section>
+
+      {home.groupPhotoUrl && (
+        <section className="relative w-full h-[38vh] min-h-[260px] sm:h-[48vh] overflow-hidden">
+          <Image src={home.groupPhotoUrl} alt="Tým SquashEspecial" fill className="object-cover" />
+        </section>
+      )}
     </div>
   );
 }

@@ -2,6 +2,7 @@ export interface HomeContent {
   title: string;
   intro: string;
   heroImageUrl?: string;
+  groupPhotoUrl?: string;
   stat1Value?: string;
   stat1Label?: string;
   stat2Value?: string;
