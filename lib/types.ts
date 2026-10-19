@@ -29,7 +29,13 @@ export interface Photo {
   id: string;
   url: string;
   caption?: string;
-  album?: string;
+  albumId?: string;
+  order?: number;
+}
+
+export interface GalleryAlbum {
+  id: string;
+  name: string;
   order?: number;
 }
 

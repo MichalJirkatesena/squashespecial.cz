@@ -21,6 +21,7 @@ import type {
   CalendarEvent,
   Coach,
   ContactInfo,
+  GalleryAlbum,
   HomeContent,
   NewsPost,
   Photo,
@@ -95,6 +96,13 @@ export async function getRosterPlayers(slug: TextPageSlug): Promise<Player[]> {
       .orderBy("order", "asc")
       .get();
     return snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<Player, "id">) }));
+  }, []);
+}
+
+export async function getGalleryAlbums(): Promise<GalleryAlbum[]> {
+  return safeGet(async () => {
+    const snap = await getAdminDb()!.collection("galleryAlbums").orderBy("order", "asc").get();
+    return snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<GalleryAlbum, "id">) }));
   }, []);
 }
 

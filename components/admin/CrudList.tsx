@@ -21,7 +21,7 @@ export type FieldConfig =
   | { key: string; label: string; type: "textarea" }
   | { key: string; label: string; type: "photo"; folder: string }
   | { key: string; label: string; type: "photos"; folder: string }
-  | { key: string; label: string; type: "select"; options: { value: string; label: string }[] };
+  | { key: string; label: string; type: "select"; options: { value: string; label: string }[]; placeholder?: string };
 
 type Item = { id: string; order: number; [key: string]: unknown };
 
@@ -124,7 +124,7 @@ export function CrudList({ collectionName, fields, emptyItem, revalidatePaths }:
                     onChange={(e) => updateField(item.id, field.key, e.target.value)}
                     className="w-full border border-slate-300 rounded px-3 py-2 text-sm bg-white"
                   >
-                    <option value="">— Bez kategorie —</option>
+                    <option value="">{field.placeholder ?? "— Bez kategorie —"}</option>
                     {field.options.map((opt) => (
                       <option key={opt.value} value={opt.value}>
                         {opt.label}

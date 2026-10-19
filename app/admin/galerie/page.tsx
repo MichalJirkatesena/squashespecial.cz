@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CrudList } from "@/components/admin/CrudList";
+import { GalleryAdmin } from "@/components/admin/GalleryAdmin";
 
 export default function AdminGaleriePage() {
   return (
@@ -8,16 +8,7 @@ export default function AdminGaleriePage() {
         ← Zpět do administrace
       </Link>
       <h1 className="text-2xl font-bold mt-2 mb-6">Galerie fotek</h1>
-      <CrudList
-        collectionName="galleryPhotos"
-        emptyItem={{ url: "", caption: "", album: "" }}
-        revalidatePaths={["/galerie"]}
-        fields={[
-          { key: "url", label: "Fotka", type: "photo", folder: "galerie" },
-          { key: "caption", label: "Popisek", type: "text" },
-          { key: "album", label: "Album (např. Turnaj v Ostravě)", type: "text" },
-        ]}
-      />
+      <GalleryAdmin />
     </div>
   );
 }
