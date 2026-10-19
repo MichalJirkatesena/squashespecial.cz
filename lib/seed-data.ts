@@ -22,7 +22,7 @@ export const seedHome: HomeContent = {
 };
 
 export const seedJunior: TextPageContent = {
-  title: "Juniorské akce a turnaje",
+  title: "Juniorský klub SQUASHESPECIAL",
   body:
     "Zde najdete informace o juniorských turnajích, squash campech a výsledcích našich nejmladších hráčů. Obsah této stránky uprav v administraci.",
 };
