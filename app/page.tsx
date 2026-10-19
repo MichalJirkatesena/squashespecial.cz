@@ -1,7 +1,7 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
 import { getHome, getNews, getPlayers, getUpcomingEvents } from "@/lib/content";
 import { NewsList } from "@/components/NewsList";
+import { SectionHeading } from "@/components/SectionHeading";
 
 export const revalidate = 60;
 
@@ -12,15 +12,6 @@ function formatBadge(dateStr: string) {
     day: date.toLocaleDateString("cs-CZ", { day: "numeric" }),
     month: date.toLocaleDateString("cs-CZ", { month: "short" }).replace(".", ""),
   };
-}
-
-function SectionHeading({ children }: { children: ReactNode }) {
-  return (
-    <h2 className="font-display font-extrabold uppercase text-2xl mb-6 flex items-center gap-3">
-      <span className="block w-10 h-[3px] bg-glow" />
-      {children}
-    </h2>
-  );
 }
 
 export default async function HomePage() {

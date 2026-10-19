@@ -1,5 +1,6 @@
 import type { CalendarEvent } from "@/lib/types";
 import { getEvents } from "@/lib/content";
+import { SectionHeading } from "@/components/SectionHeading";
 
 export const revalidate = 60;
 export const metadata = { title: "Kalendář akcí | SquashEspecial" };
@@ -37,14 +38,20 @@ export default async function KalendarPage() {
   const past = events.filter((e) => e.date < todayIso).reverse();
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
-      <h1 className="font-display font-black uppercase text-4xl mb-8">Kalendář akcí</h1>
+    <div>
+      <div className="max-w-6xl mx-auto px-4 pt-10">
+        <h1 className="font-display font-black uppercase text-4xl">Kalendář akcí</h1>
+      </div>
 
-      <h2 className="font-display font-bold uppercase text-xl mb-4">Budoucí akce</h2>
-      <EventList events={upcoming} emptyText="Momentálně nejsou naplánované žádné akce." />
+      <section className="max-w-6xl mx-auto px-4 py-12 border-t border-line mt-10">
+        <SectionHeading>Budoucí akce</SectionHeading>
+        <EventList events={upcoming} emptyText="Momentálně nejsou naplánované žádné akce." />
+      </section>
 
-      <h2 className="font-display font-bold uppercase text-xl mb-4 mt-12">Proběhlé akce</h2>
-      <EventList events={past} emptyText="Zatím zde nejsou žádné proběhlé akce." />
+      <section className="max-w-6xl mx-auto px-4 py-12 border-t border-line">
+        <SectionHeading>Proběhlé akce</SectionHeading>
+        <EventList events={past} emptyText="Zatím zde nejsou žádné proběhlé akce." />
+      </section>
     </div>
   );
 }
