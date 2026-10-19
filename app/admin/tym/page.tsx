@@ -7,7 +7,7 @@ export default function AdminTymPage() {
       <Link href="/admin" className="text-sm text-orange-600 hover:underline">
         ← Zpět do administrace
       </Link>
-      <h1 className="text-2xl font-bold mt-2 mb-6">Team SquashEspecial</h1>
+      <h1 className="text-2xl font-bold mt-2 mb-6">Ligové týmy</h1>
       <ul className="grid sm:grid-cols-3 gap-3">
         {LEAGUES.map((league) => (
           <li key={league.slug}>
