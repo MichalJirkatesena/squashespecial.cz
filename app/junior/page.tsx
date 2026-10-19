@@ -1,15 +1,15 @@
-import { getRosterPlayers, getTextPage, getTextPagePhotos } from "@/lib/content";
+import { getNewsByCategory, getRosterPlayers, getTextPage } from "@/lib/content";
 import { PersonGrid } from "@/components/PersonGrid";
-import { PhotoGrid } from "@/components/PhotoGrid";
+import { NewsList } from "@/components/NewsList";
 
 export const revalidate = 60;
 export const metadata = { title: "Junior | SquashEspecial" };
 
 export default async function JuniorPage() {
-  const [content, players, photos] = await Promise.all([
+  const [content, players, news] = await Promise.all([
     getTextPage("junior"),
     getRosterPlayers("junior"),
-    getTextPagePhotos("junior"),
+    getNewsByCategory("junior"),
   ]);
 
   return (
@@ -20,8 +20,8 @@ export default async function JuniorPage() {
       <h2 className="font-display font-bold uppercase text-xl mb-4">Hráči</h2>
       <PersonGrid people={players} />
 
-      <h2 className="font-display font-bold uppercase text-xl mb-4 mt-12">Fotky a výsledky</h2>
-      <PhotoGrid photos={photos} />
+      <h2 className="font-display font-bold uppercase text-xl mb-4 mt-12">Archiv aktualit</h2>
+      <NewsList posts={news} />
     </div>
   );
 }

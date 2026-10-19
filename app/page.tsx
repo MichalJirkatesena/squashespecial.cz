@@ -1,14 +1,9 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { getHome, getNews, getPlayers, getUpcomingEvents } from "@/lib/content";
+import { NewsList } from "@/components/NewsList";
 
 export const revalidate = 60;
-
-function formatDate(dateStr: string) {
-  const date = new Date(dateStr);
-  if (Number.isNaN(date.getTime())) return dateStr;
-  return date.toLocaleDateString("cs-CZ", { day: "numeric", month: "long", year: "numeric" });
-}
 
 function formatBadge(dateStr: string) {
   const date = new Date(dateStr);
@@ -88,21 +83,7 @@ export default async function HomePage() {
         <div className="grid gap-12 md:grid-cols-2">
           <div>
             <SectionHeading>Aktuality</SectionHeading>
-            {news.length === 0 ? (
-              <p className="text-muted">Zatím tu nejsou žádné aktuality.</p>
-            ) : (
-              <div className="space-y-5">
-                {news.map((post) => (
-                  <article key={post.id} className="border border-line rounded-sm p-5 hover:border-glow/50 transition-colors">
-                    <span className="font-mono text-xs text-glow uppercase tracking-wide block mb-2">
-                      {formatDate(post.date)}
-                    </span>
-                    <h3 className="font-display font-bold text-lg mb-2 text-balance">{post.title}</h3>
-                    <p className="text-muted text-sm leading-relaxed whitespace-pre-line">{post.body}</p>
-                  </article>
-                ))}
-              </div>
-            )}
+            <NewsList posts={news} />
           </div>
 
           <div>

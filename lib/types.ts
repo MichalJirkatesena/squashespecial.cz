@@ -16,6 +16,7 @@ export interface NewsPost {
   title: string;
   body: string;
   date: string;
+  category?: string;
   order?: number;
 }
 

@@ -1,6 +1,7 @@
 import "server-only";
 import { getAdminDb } from "./firebaseAdmin";
 import type { LeagueSlug } from "./leagues";
+import type { NewsCategorySlug } from "./newsCategories";
 import {
   seedCoaches,
   seedContact,
@@ -131,6 +132,11 @@ export async function getNews(limit?: number): Promise<NewsPost[]> {
     const snap = await query.get();
     return snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<NewsPost, "id">) }));
   }, withSeedIds(seedNews, "news").slice(0, limit));
+}
+
+export async function getNewsByCategory(category: NewsCategorySlug): Promise<NewsPost[]> {
+  const all = await getNews();
+  return all.filter((post) => post.category === category);
 }
 
 export async function getContact(): Promise<ContactInfo> {

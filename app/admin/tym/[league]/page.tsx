@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { DocEditor } from "@/components/admin/DocEditor";
 import { CrudList } from "@/components/admin/CrudList";
 import { isLeagueSlug, LEAGUES, type LeagueSlug } from "@/lib/leagues";
+import { NEWS_CATEGORIES } from "@/lib/newsCategories";
 import { seedTeam1, seedTeam2, seedTeam3 } from "@/lib/seed-data";
 import type { TextPageContent } from "@/lib/types";
 
@@ -65,6 +66,14 @@ export default async function AdminLeaguePage({ params }: { params: Promise<{ le
           { key: "caption", label: "Popisek", type: "text" },
         ]}
       />
+
+      <p className="text-sm text-slate-500 mt-10">
+        Archiv aktualit se zobrazuje automaticky — spravuje se v{" "}
+        <Link href="/admin/aktuality" className="text-orange-600 hover:underline">
+          Aktualitách
+        </Link>{" "}
+        (zvol kategorii „{NEWS_CATEGORIES.find((c) => c.slug === league)?.label}“).
+      </p>
     </div>
   );
 }

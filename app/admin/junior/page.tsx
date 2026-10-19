@@ -35,16 +35,13 @@ export default function AdminJuniorPage() {
         ]}
       />
 
-      <h2 className="text-xl font-semibold mt-10 mb-4">Fotky a výsledky</h2>
-      <CrudList
-        collectionName="siteContent/junior/photos"
-        emptyItem={{ url: "", caption: "" }}
-        revalidatePaths={["/junior"]}
-        fields={[
-          { key: "url", label: "Fotka", type: "photo", folder: "junior" },
-          { key: "caption", label: "Popisek", type: "text" },
-        ]}
-      />
+      <p className="text-sm text-slate-500 mt-10">
+        Archiv aktualit se zobrazuje automaticky — spravuje se v{" "}
+        <Link href="/admin/aktuality" className="text-orange-600 hover:underline">
+          Aktualitách
+        </Link>{" "}
+        (zvol kategorii „Junioři“).
+      </p>
     </div>
   );
 }

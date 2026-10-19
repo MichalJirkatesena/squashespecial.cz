@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getRosterPlayers, getTextPage, getTextPagePhotos } from "@/lib/content";
+import { getNewsByCategory, getRosterPlayers, getTextPage, getTextPagePhotos } from "@/lib/content";
 import { isLeagueSlug, LEAGUES } from "@/lib/leagues";
 import { PersonGrid } from "@/components/PersonGrid";
 import { PhotoGrid } from "@/components/PhotoGrid";
+import { NewsList } from "@/components/NewsList";
 
 export const revalidate = 60;
 
@@ -15,10 +16,11 @@ export default async function LeaguePage({ params }: { params: Promise<{ league:
   const { league } = await params;
   if (!isLeagueSlug(league)) notFound();
 
-  const [content, players, photos] = await Promise.all([
+  const [content, players, photos, news] = await Promise.all([
     getTextPage(league),
     getRosterPlayers(league),
     getTextPagePhotos(league),
+    getNewsByCategory(league),
   ]);
 
   return (
@@ -40,6 +42,9 @@ export default async function LeaguePage({ params }: { params: Promise<{ league:
           <PhotoGrid photos={photos} />
         </>
       )}
+
+      <h2 className="font-display font-bold uppercase text-xl mb-4 mt-12">Archiv aktualit</h2>
+      <NewsList posts={news} />
     </div>
   );
 }
