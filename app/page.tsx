@@ -160,8 +160,13 @@ export default async function HomePage() {
       </section>
 
       {home.groupPhotoUrl && (
-        <section className="relative w-full h-[38vh] min-h-[260px] sm:h-[48vh] overflow-hidden">
-          <Image src={home.groupPhotoUrl} alt="Tým SquashEspecial" fill className="object-cover" />
+        <section className="max-w-6xl mx-auto px-4 py-14 border-t border-line">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={home.groupPhotoUrl}
+            alt="Tým SquashEspecial"
+            className="w-full h-auto rounded-sm border border-line"
+          />
         </section>
       )}
     </div>
