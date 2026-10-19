@@ -9,7 +9,7 @@ const sections = [
   { href: "/admin/uvod", label: "Úvod / O klubu" },
   { href: "/admin/aktuality", label: "Aktuality" },
   { href: "/admin/galerie", label: "Galerie fotek" },
-  { href: "/admin/junior", label: "Juniorské akce a turnaje" },
+  { href: "/admin/junior", label: "Juniorský klub SQUASHESPECIAL" },
   { href: "/admin/prazska-tour", label: "Pražská juniorská tour" },
   { href: "/admin/hraci", label: "Hráči na homepage" },
   { href: "/admin/trenere", label: "Trenéři" },

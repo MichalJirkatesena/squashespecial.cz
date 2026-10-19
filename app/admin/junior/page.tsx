@@ -9,7 +9,7 @@ export default function AdminJuniorPage() {
       <Link href="/admin" className="text-sm text-orange-600 hover:underline">
         ← Zpět do administrace
       </Link>
-      <h1 className="text-2xl font-bold mt-2 mb-6">Juniorské akce a turnaje</h1>
+      <h1 className="text-2xl font-bold mt-2 mb-6">Juniorský klub SQUASHESPECIAL</h1>
       <DocEditor
         path="siteContent/junior"
         defaultValue={seedJunior}
