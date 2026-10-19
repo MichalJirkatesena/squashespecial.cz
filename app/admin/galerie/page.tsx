@@ -10,11 +10,12 @@ export default function AdminGaleriePage() {
       <h1 className="text-2xl font-bold mt-2 mb-6">Galerie fotek</h1>
       <CrudList
         collectionName="galleryPhotos"
-        emptyItem={{ url: "", caption: "" }}
+        emptyItem={{ url: "", caption: "", album: "" }}
         revalidatePaths={["/galerie"]}
         fields={[
           { key: "url", label: "Fotka", type: "photo", folder: "galerie" },
           { key: "caption", label: "Popisek", type: "text" },
+          { key: "album", label: "Album (např. Turnaj v Ostravě)", type: "text" },
         ]}
       />
     </div>

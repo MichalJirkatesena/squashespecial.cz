@@ -29,6 +29,7 @@ export interface Photo {
   id: string;
   url: string;
   caption?: string;
+  album?: string;
   order?: number;
 }
 

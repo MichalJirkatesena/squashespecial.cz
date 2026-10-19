@@ -2,6 +2,7 @@
 
 import { useRef, useState, type ChangeEvent } from "react";
 import { auth } from "@/lib/firebaseClient";
+import { compressImage } from "@/lib/compressImage";
 
 interface PhotoUploaderProps {
   folder: string;
@@ -19,9 +20,10 @@ export function PhotoUploader({ folder, onUploaded }: PhotoUploaderProps) {
     setUploading(true);
     setError(null);
     try {
+      const compressed = await compressImage(file);
       const token = await auth.currentUser.getIdToken();
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", compressed);
       formData.append("folder", folder);
 
       const res = await fetch("/api/upload", {
