@@ -38,7 +38,7 @@ export default async function HomePage() {
         ) : (
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(160deg, #0f9d76 0%, #142520 100%)" }}
+            style={{ background: "linear-gradient(160deg, #2ee88a 0%, #0f1c16 85%)" }}
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
@@ -61,7 +61,7 @@ export default async function HomePage() {
         <section className="max-w-6xl mx-auto px-4 py-12">
           <div className="grid gap-4 sm:grid-cols-3">
             {stats.map((stat, i) => (
-              <div key={i} className="font-mono text-center border border-line rounded-sm px-6 py-8 bg-surface">
+              <div key={i} className="font-mono text-center border border-glow/40 rounded-sm px-6 py-8 bg-surface shadow-[0_0_24px_-8px_var(--glow)]">
                 <b className="block text-4xl text-glow tabular-nums mb-1">{stat.value}</b>
                 <span className="text-sm text-muted uppercase tracking-wide">{stat.label}</span>
               </div>
