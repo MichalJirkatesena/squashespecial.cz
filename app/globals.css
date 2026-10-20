@@ -7,7 +7,6 @@
   --line: #d6ddd9;
   --surface: #eaf0ed;
   --glow: #0f9d76;
-  --matchred: #d94436;
 }
 
 @theme inline {
@@ -17,7 +16,6 @@
   --color-line: var(--line);
   --color-surface: var(--surface);
   --color-glow: var(--glow);
-  --color-matchred: var(--matchred);
   --font-display: var(--font-display);
   --font-body: var(--font-body);
   --font-mono: var(--font-mono);

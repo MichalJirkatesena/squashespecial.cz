@@ -8,7 +8,7 @@ export function Footer({ contact }: { contact: ContactInfo }) {
       <div className="max-w-6xl mx-auto px-4 py-10 grid gap-8 sm:grid-cols-2">
         <div>
           <p className="font-display font-extrabold uppercase tracking-wide text-fg mb-2">
-            Squash<span className="text-matchred">Especial</span>
+            Squash<span className="text-glow">Especial</span>
           </p>
           {hasContact ? (
             <ul className="text-sm text-muted space-y-1">

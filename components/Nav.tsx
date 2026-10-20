@@ -25,7 +25,7 @@ export function Nav() {
           className="font-display font-extrabold uppercase tracking-wide text-2xl sm:text-3xl"
           onClick={() => setOpen(false)}
         >
-          Squash<span className="text-matchred">Especial</span>
+          Squash<span className="text-glow">Especial</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 font-display font-bold uppercase text-base tracking-wide">
